@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             ShoppingCart shoppingCart = new ShoppingCart();
-            System.out.println("Select a language: en, fi, jp, sv");
+            System.out.println("Select a language: en, fi, ja, sv");
             String language = sc.nextLine().toLowerCase();
             System.out.println("Select a country: US, FI, JP, SE");
             String country = sc.nextLine().toUpperCase();
@@ -22,7 +22,7 @@ public class Main {
             float itemPrice = sc.nextFloat();
 
             shoppingCart.addCartItem(itemCount, itemPrice);
-            System.out.println(shoppingCart.getTotalCost());
+            System.out.println(bundle.getString("total") + shoppingCart.getTotalCost());
 
         }
     }
