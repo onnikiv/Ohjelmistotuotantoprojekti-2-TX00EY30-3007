@@ -5,5 +5,5 @@ docker pull onnikiv/shoppingcart:latest
 ```
 
 ```cmd
-docker run onnikiv/shoppingcart:latest
+docker run -it onnikiv/shoppingcart:latest
 ```
