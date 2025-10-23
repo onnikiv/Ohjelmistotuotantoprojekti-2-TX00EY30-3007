@@ -43,6 +43,31 @@ pipeline {
             }
         }
 
+        stage('Test & Coverage') {
+            steps {
+                script {
+                    dir('shoppingcart') {
+                        if (isUnix()) {
+                            sh 'mvn test jacoco:report'
+                        } else {
+                            bat 'mvn test jacoco:report'
+                        }
+                    }
+                }
+            }
+            post {
+                always {
+                    script {
+                        dir('shoppingcart') {
+                            // Archive JUnit test reports and JaCoCo HTML report
+                            junit allowEmptyResults: true, testResults: 'shoppingcart/target/surefire-reports/*.xml'
+                            archiveArtifacts artifacts: 'shoppingcart/target/site/jacoco/**', allowEmptyArchive: true
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Test') {
             steps {
                 script {
