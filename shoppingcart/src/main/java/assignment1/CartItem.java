@@ -2,10 +2,10 @@ package assignment1;
 
 public class CartItem {
 
-    private final String itemName;
+    private final int itemName;
     private final double itemCost;
 
-    public CartItem(String itemName, double itemCost) {
+    public CartItem(int itemName, double itemCost) {
         this.itemName = itemName;
         this.itemCost = itemCost;
     }
@@ -14,7 +14,7 @@ public class CartItem {
         return itemCost;
     }
 
-    public String getName() {
+    public int getName() {
         return itemName;
     }
 }

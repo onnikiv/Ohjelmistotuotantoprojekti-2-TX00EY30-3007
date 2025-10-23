@@ -9,19 +9,19 @@ public class Main {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             ShoppingCart shoppingCart = new ShoppingCart();
-
-            Locale myLocale = new Locale("en", "US");
+            System.out.println("Select a language: en, fi, jp, sv");
+            String language = sc.nextLine().toLowerCase();
+            System.out.println("Select a country: US, FI, JP, SE");
+            String country = sc.nextLine().toUpperCase();
+            Locale myLocale = new Locale(language, country);
             ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", myLocale);
 
-            System.out.println(bundle.getString("wish"));
-            System.out.println("Add items to shoppingcart: ");
-            System.out.println("[1] Banana, 0.5e");
-            System.out.println("[2] Milk, 1e");
-            System.out.println("[3] Sausage, 4e");
-            System.out.println("[4] Bread, 2e");
-            System.out.println("[5] Porridge, 1.5e");
+            System.out.println(bundle.getString("count"));
+            int itemCount = sc.nextInt();
+            System.out.println(bundle.getString("price"));
+            float itemPrice = sc.nextFloat();
 
-            shoppingCart.addCartItem(sc.nextInt());
+            shoppingCart.addCartItem(itemCount, itemPrice);
             System.out.println(shoppingCart.getTotalCost());
 
         }
