@@ -31,10 +31,13 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn clean package -DskipTests'
-                    } else {
-                        bat 'mvn clean package -DskipTests'
+                    // run mvn inside the shoppingcart subdirectory where the pom.xml lives
+                    dir('shoppingcart') {
+                        if (isUnix()) {
+                            sh 'mvn clean package -DskipTests'
+                        } else {
+                            bat 'mvn clean package -DskipTests'
+                        }
                     }
                 }
             }
@@ -51,10 +54,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                    } else {
-                        bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    // build Docker image using shoppingcart as the build context
+                    dir('shoppingcart') {
+                        if (isUnix()) {
+                            sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                        } else {
+                            bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                        }
                     }
                 }
             }
