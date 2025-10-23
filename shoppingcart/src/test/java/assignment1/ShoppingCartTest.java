@@ -1,6 +1,10 @@
 package assignment1;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,5 +39,26 @@ public class ShoppingCartTest {
     public void addingZeroCountDoesNotChangeTotal() {
         cart.addCartItem(0, 10);
         assertEquals("Adding zero count should leave total 0", 0.0, cart.getTotalCost(), 0.0001);
+    }
+
+    @Test
+    public void testAllLanguageResourceBundles() {
+        // Test that all four language bundles load and contain required keys
+        Locale[] locales = {
+            new Locale("en", "US"), // English
+            new Locale("fi", "FI"), // Finnish
+            new Locale("ja", "JP"), // Japanese
+            new Locale("sv", "SE") // Swedish
+        };
+
+        for (Locale locale : locales) {
+            ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", locale);
+            assertNotNull("Resource bundle for " + locale + " should load", bundle);
+            assertNotNull("Bundle should contain 'count' key", bundle.getString("count"));
+            assertNotNull("Bundle should contain 'price' key", bundle.getString("price"));
+            assertNotNull("Bundle should contain 'total' key", bundle.getString("total"));
+            assertNotNull("Bundle should contain 'continue' key", bundle.getString("continue"));
+            assertNotNull("Bundle should contain 'exit' key", bundle.getString("exit"));
+        }
     }
 }
