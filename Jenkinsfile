@@ -57,13 +57,9 @@ pipeline {
             }
             post {
                 always {
-                    script {
-                        dir('shoppingcart') {
-                            // Archive JUnit test reports and JaCoCo HTML report
-                            junit allowEmptyResults: true, testResults: 'shoppingcart/target/surefire-reports/*.xml'
-                            archiveArtifacts artifacts: 'shoppingcart/target/site/jacoco/**', allowEmptyArchive: true
-                        }
-                    }
+                    // Archive JUnit test reports and JaCoCo HTML report
+                    junit allowEmptyResults: true, testResults: 'shoppingcart/target/surefire-reports/*.xml'
+                    archiveArtifacts artifacts: 'shoppingcart/target/site/jacoco/**', allowEmptyArchive: true
                 }
             }
         }
