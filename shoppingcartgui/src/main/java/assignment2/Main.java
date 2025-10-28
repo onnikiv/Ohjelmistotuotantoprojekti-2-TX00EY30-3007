@@ -1,38 +1,9 @@
 package assignment2;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-
-import assignment2.model.ShoppingCart;
+import assignment2.view.ShoppingCartGui;
 
 public class Main {
-
     public static void main(String[] args) {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Select a language: en, fi, ja, sv");
-            String language = sc.nextLine().toLowerCase();
-            System.out.println("Select a country: US, FI, JP, SE");
-            String country = sc.nextLine().toUpperCase();
-            Locale myLocale = new Locale(language, country);
-            ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", myLocale);
-            ShoppingCart shoppingCart = new ShoppingCart();
-
-            while (true) {
-
-                System.out.println(bundle.getString("count"));
-                int itemCount = sc.nextInt();
-                System.out.println(bundle.getString("price"));
-                float itemPrice = sc.nextFloat();
-
-                shoppingCart.addCartItem(itemCount, itemPrice);
-                System.out.println(bundle.getString("total") + shoppingCart.getTotalCost());
-                System.out.println(bundle.getString("continue"));
-                if (sc.next().equals("N")) {
-                    System.out.println(bundle.getString("exit"));
-                    break;
-                }
-            }
-        }
+        ShoppingCartGui.launch(ShoppingCartGui.class);
     }
 }
