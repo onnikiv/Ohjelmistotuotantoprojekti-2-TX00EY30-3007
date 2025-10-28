@@ -31,6 +31,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    // run mvn inside the shoppingcart subdirectory where the pom.xml lives
                     dir('shoppingcart') {
                         if (isUnix()) {
                             sh 'mvn clean package -DskipTests'
@@ -45,17 +46,20 @@ pipeline {
         stage('Test & Coverage') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn test jacoco:report'
-                    } else {
-                        bat 'mvn test jacoco:report'
+                    dir('shoppingcart') {
+                        if (isUnix()) {
+                            sh 'mvn test jacoco:report'
+                        } else {
+                            bat 'mvn test jacoco:report'
+                        }
                     }
                 }
             }
             post {
                 always {
-                    junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-                    archiveArtifacts artifacts: 'target/site/jacoco/**', allowEmptyArchive: true
+                    // Archive JUnit test reports and JaCoCo HTML report
+                    junit allowEmptyResults: true, testResults: 'shoppingcart/target/surefire-reports/*.xml'
+                    archiveArtifacts artifacts: 'shoppingcart/target/site/jacoco/**', allowEmptyArchive: true
                 }
             }
         }
@@ -71,10 +75,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                    } else {
-                        bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                    // build Docker image using shoppingcart as the build context
+                    dir('shoppingcart') {
+                        if (isUnix()) {
+                            sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                        } else {
+                            bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                        }
                     }
                 }
             }
