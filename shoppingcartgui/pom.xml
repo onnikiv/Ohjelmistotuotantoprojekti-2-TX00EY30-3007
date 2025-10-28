@@ -11,8 +11,20 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <javafx.version>23.0.1</javafx.version>
     </properties>
     <dependencies>
+        <!-- JavaFX UI dependencies for FXML-based GUI -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -57,9 +69,20 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>assignment1.Main</mainClass>
+                            <mainClass>assignment2.Main</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <!-- JavaFX Maven plugin (optional; helps with running/debugging) -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.version}</version>
+                <configuration>
+                    <launcher>app</launcher>
+                    <mainClass>assignment2.Main</mainClass>
+                    <stripDebug>false</stripDebug>
                 </configuration>
             </plugin>
             <!-- Create an executable JAR with dependencies -->
