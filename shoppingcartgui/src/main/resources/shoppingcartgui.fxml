@@ -7,18 +7,31 @@
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
 			fx:controller="assignment2.controller.ShoppingCartController">
 	<top>
-		<HBox spacing="8.0">
-			<padding>
-				<Insets top="10" right="10" bottom="10" left="10" />
-			</padding>
+		<VBox spacing="8.0">
 			<children>
-				<Label text="Item count" />
-				<TextField fx:id="itemCountField" promptText="Count" prefWidth="80" />
-				<Label text="Price per" />
-				<TextField fx:id="itemPriceField" promptText="Price" prefWidth="100" />
-				<Button fx:id="addButton" text="Add item" onAction="#handleAddItem" />
+				<HBox spacing="8.0" alignment="CENTER_LEFT">
+					<padding>
+						<Insets top="10" right="10" bottom="5" left="10" />
+					</padding>
+					<children>
+						<Label fx:id="languageLabel" text="Language:" />
+						<ComboBox fx:id="languageComboBox" onAction="#handleLanguageChange" />
+					</children>
+				</HBox>
+				<HBox spacing="8.0">
+					<padding>
+						<Insets top="5" right="10" bottom="10" left="10" />
+					</padding>
+					<children>
+						<Label fx:id="itemCountLabel" text="Item count" />
+						<TextField fx:id="itemCountField" promptText="Count" prefWidth="80" />
+						<Label fx:id="pricePerLabel" text="Price per" />
+						<TextField fx:id="itemPriceField" promptText="Price" prefWidth="100" />
+						<Button fx:id="addButton" text="Add item" onAction="#handleAddItem" />
+					</children>
+				</HBox>
 			</children>
-		</HBox>
+		</VBox>
 	</top>
 	<center>
 		<TableView fx:id="cartTable" prefHeight="300.0">
@@ -34,7 +47,7 @@
 				<Insets top="10" right="10" bottom="10" left="10" />
 			</padding>
 			<children>
-				<Label text="Total:" />
+				<Label fx:id="totalTextLabel" text="Total:" />
                 <Label fx:id="totalLabel" text="0.00" />
 				<Button fx:id="clearButton" text="Clear" onAction="#handleClearCart" />
 			</children>

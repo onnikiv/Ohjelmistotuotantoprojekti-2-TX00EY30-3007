@@ -11,7 +11,7 @@ public class ShoppingCartGui extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/shoppingcartgui.fxml"));
-        stage.setTitle("Shopping Cart");
+        stage.setTitle("Ostoskärry - onnikiv");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }

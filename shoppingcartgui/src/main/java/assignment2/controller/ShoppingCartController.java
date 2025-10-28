@@ -9,14 +9,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ShoppingCartController {
 
+    @FXML
+    private ComboBox<String> languageComboBox;
+    @FXML
+    private Label languageLabel;
+    @FXML
+    private Label itemCountLabel;
+    @FXML
+    private Label pricePerLabel;
+    @FXML
+    private Label totalTextLabel;
     @FXML
     private TextField itemCountField;
     @FXML
@@ -35,11 +47,18 @@ public class ShoppingCartController {
     private Label totalLabel;
 
     private ShoppingCart shoppingCart = new ShoppingCart();
-    private ObservableList<CartItem> cartItems = FXCollections.observableArrayList();
+    private final ObservableList<CartItem> cartItems = FXCollections.observableArrayList();
     private ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", Locale.ENGLISH);
 
     @FXML
     public void initialize() {
+        // Initialize language ComboBox
+        ObservableList<String> languages = FXCollections.observableArrayList(
+                "English", "Suomi", "Svenska", "日本語"
+        );
+        languageComboBox.setItems(languages);
+        languageComboBox.setValue("Suomi");
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         costColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
         cartTable.setItems(cartItems);
@@ -69,6 +88,25 @@ public class ShoppingCartController {
         totalLabel.setText("0.00");
     }
 
+    @FXML
+    private void handleLanguageChange() {
+        String selectedLanguage = languageComboBox.getValue();
+        switch (selectedLanguage) {
+            case "English":
+                changeLanguage("en", "US");
+                break;
+            case "Suomi":
+                changeLanguage("fi", "FI");
+                break;
+            case "Svenska":
+                changeLanguage("sv", "SE");
+                break;
+            case "日本語":
+                changeLanguage("ja", "JP");
+                break;
+        }
+    }
+
     public void changeLanguage(String language, String country) {
         Locale locale = Locale.of(language, country);
         bundle = ResourceBundle.getBundle("localization.MessagesBundle", locale);
@@ -76,12 +114,21 @@ public class ShoppingCartController {
     }
 
     private void updateTexts() {
+        languageLabel.setText(bundle.getString("language"));
+        itemCountLabel.setText(bundle.getString("itemCount"));
+        pricePerLabel.setText(bundle.getString("pricePerItem"));
         itemCountField.setPromptText(bundle.getString("count"));
         itemPriceField.setPromptText(bundle.getString("price"));
         addButton.setText(bundle.getString("add"));
         clearButton.setText(bundle.getString("empty"));
-        totalLabel.setText(bundle.getString("total") + String.format("%.2f", shoppingCart.getTotalCost()));
+        totalTextLabel.setText(bundle.getString("total"));
+        totalLabel.setText(String.format("%.2f", shoppingCart.getTotalCost()));
         nameColumn.setText(bundle.getString("count"));
         costColumn.setText(bundle.getString("price"));
+
+        if (languageLabel.getScene() != null) {
+            Stage stage = (Stage) languageLabel.getScene().getWindow();
+            stage.setTitle(bundle.getString("stagetitle"));
+        }
     }
 }
