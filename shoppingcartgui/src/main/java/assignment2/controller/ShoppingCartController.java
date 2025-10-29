@@ -57,7 +57,7 @@ public class ShoppingCartController {
                 "English", "Suomi", "Svenska", "日本語"
         );
         languageComboBox.setItems(languages);
-        languageComboBox.setValue("Suomi");
+        languageComboBox.setValue("English");
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         costColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
@@ -92,18 +92,14 @@ public class ShoppingCartController {
     private void handleLanguageChange() {
         String selectedLanguage = languageComboBox.getValue();
         switch (selectedLanguage) {
-            case "English":
+            case "English" ->
                 changeLanguage("en", "US");
-                break;
-            case "Suomi":
+            case "Suomi" ->
                 changeLanguage("fi", "FI");
-                break;
-            case "Svenska":
+            case "Svenska" ->
                 changeLanguage("sv", "SE");
-                break;
-            case "日本語":
+            case "日本語" ->
                 changeLanguage("ja", "JP");
-                break;
         }
     }
 
