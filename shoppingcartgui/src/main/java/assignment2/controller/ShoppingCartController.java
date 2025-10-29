@@ -48,7 +48,7 @@ public class ShoppingCartController {
 
     private ShoppingCart shoppingCart = new ShoppingCart();
     private final ObservableList<CartItem> cartItems = FXCollections.observableArrayList();
-    private ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", Locale.ENGLISH);
+    private ResourceBundle bundle = ResourceBundle.getBundle("localization.MessagesBundle", Locale.of("en", "US"));
 
     @FXML
     public void initialize() {
