@@ -17,3 +17,11 @@ docker run --rm -it onnikiv/shoppingcart:latest
 ![xming](images/02/inclass-assignment-2-shoppingcartgui-onnikiv.png)
 ![CI/CD](images/02/inclass-assignment-2-shoppingcartgui-jenkins-onnikiv.png)
 ![jacoco](images/02/inclass-assignment-2-shoppingcartgui-jacoco-onnikiv.png)
+
+## Inclass Assignment 3 - JavaFX Shopping Cart with DATABASE Localization
+
+![JavaFX GUI](images/03/shopping-cart-GUI.png)
+![DB-item-translations](images/03/shopping-cart-db-item-translations.png)
+![DB-items](images/03/shopping-cart-db-items.png)
+![Jenkins pipeline](images/03/shopping-cart-db-pipeline.png)
+![docker](images/03/shopping-cart-db-docker.png)
