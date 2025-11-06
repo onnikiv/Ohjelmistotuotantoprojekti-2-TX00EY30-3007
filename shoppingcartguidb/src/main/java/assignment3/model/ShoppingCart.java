@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 public class ShoppingCart {
 
-    private int totalCost;
+    private double totalCost;
     private final ArrayList<CartItem> cartItems;
-    private int index = 1;
 
     public ShoppingCart() {
         this.cartItems = new ArrayList<>();
@@ -14,10 +13,8 @@ public class ShoppingCart {
     }
 
     public void addCartItem(int count, float pricePer) {
-        int cost = (int) (count * pricePer);
+        double cost = count * pricePer;
         totalCost += cost;
-        this.cartItems.add(new CartItem(index, cost));
-        index++;
     }
 
     public double getTotalCost() {

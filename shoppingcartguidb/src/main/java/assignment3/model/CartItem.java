@@ -2,10 +2,10 @@ package assignment3.model;
 
 public class CartItem {
 
-    private final int itemName;
+    private final String itemName;
     private final double itemCost;
 
-    public CartItem(int itemName, double itemCost) {
+    public CartItem(String itemName, double itemCost) {
         this.itemName = itemName;
         this.itemCost = itemCost;
     }
@@ -14,7 +14,7 @@ public class CartItem {
         return itemCost;
     }
 
-    public int getName() {
+    public String getName() {
         return itemName;
     }
 }

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
-			fx:controller="assignment2.controller.ShoppingCartController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment3.controller.ShoppingCartController">
 	<top>
 		<VBox spacing="8.0">
 			<children>
-				<HBox spacing="8.0" alignment="CENTER_LEFT">
+				<HBox alignment="CENTER_LEFT" spacing="8.0">
 					<padding>
-						<Insets top="10" right="10" bottom="5" left="10" />
+						<Insets bottom="5" left="10" right="10" top="10" />
 					</padding>
 					<children>
 						<Label fx:id="languageLabel" text="Language:" />
@@ -20,14 +26,15 @@
 				</HBox>
 				<HBox spacing="8.0">
 					<padding>
-						<Insets top="5" right="10" bottom="10" left="10" />
+						<Insets bottom="10" left="10" right="10" top="5" />
 					</padding>
 					<children>
-						<Label fx:id="itemCountLabel" text="Item count" />
-						<TextField fx:id="itemCountField" promptText="Count" prefWidth="80" />
+				<Label fx:id="itemCountLabel" text="Item count" />
+						<TextField fx:id="itemCountField" prefWidth="80" promptText="Count" />
 						<Label fx:id="pricePerLabel" text="Price per" />
-						<TextField fx:id="itemPriceField" promptText="Price" prefWidth="100" />
-						<Button fx:id="addButton" text="Add item" onAction="#handleAddItem" />
+						<TextField fx:id="itemPriceField" prefWidth="100" promptText="Price" />
+				<TextField fx:id="itemNameField" prefWidth="180" promptText="Item name" />
+						<Button fx:id="addButton" onAction="#handleAddItem" text="Add item" />
 					</children>
 				</HBox>
 			</children>
@@ -36,22 +43,21 @@
 	<center>
 		<TableView fx:id="cartTable" prefHeight="300.0">
 			<columns>
-				<TableColumn fx:id="nameColumn" text="Item" prefWidth="200.0" />
-				<TableColumn fx:id="costColumn" text="Cost" prefWidth="120.0" />
+				<TableColumn fx:id="nameColumn" prefWidth="200.0" text="Item" />
+				<TableColumn fx:id="costColumn" prefWidth="120.0" text="Cost" />
 			</columns>
 		</TableView>
 	</center>
 	<bottom>
-		<HBox spacing="10.0" alignment="CENTER_RIGHT">
+		<HBox alignment="CENTER_RIGHT" spacing="10.0">
 			<padding>
-				<Insets top="10" right="10" bottom="10" left="10" />
+				<Insets bottom="10" left="10" right="10" top="10" />
 			</padding>
 			<children>
 				<Label fx:id="totalTextLabel" text="Total:" />
                 <Label fx:id="totalLabel" text="0.00" />
-				<Button fx:id="clearButton" text="Clear" onAction="#handleClearCart" />
+				<Button fx:id="clearButton" onAction="#handleClearCart" text="Clear" />
 			</children>
 		</HBox>
 	</bottom>
 </BorderPane>
-
