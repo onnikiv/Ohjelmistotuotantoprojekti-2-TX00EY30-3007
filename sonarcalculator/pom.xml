@@ -56,7 +56,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Ensure the JAR is executable by adding Main-Class to the manifest -->
+            <!-- Ensure the JAR is executable by adding Calculator-Class to the manifest -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -64,7 +64,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>assignment3.Main</mainClass>
+                            <mainClass>assignment3.Calculator</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -83,7 +83,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>assignment4.Main</mainClass>
+                                    <mainClass>assignment4.Calculator</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
