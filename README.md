@@ -25,3 +25,10 @@ docker run --rm -it onnikiv/shoppingcart:latest
 ![DB-items](images/03/shopping-cart-db-items.png)
 ![Jenkins pipeline](images/03/shopping-cart-db-pipeline.png)
 ![docker](images/03/shopping-cart-db-docker.png)
+
+## Inclass Assignment 4 - Calculator with SonarQube
+
+```cmd
+cd .\sonarcalculator\
+sonar-scanner
+```
