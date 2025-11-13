@@ -46,4 +46,9 @@ public class CalculatorTest {
     public void testCalculateDivide() {
         assertEquals(2.5, calculator.calculate(5.0, 2.0, "/"), 0.001);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testCalculateUnknownOperation() {
+        calculator.calculate(5.0, 3.0, "^");
+    }
 }
