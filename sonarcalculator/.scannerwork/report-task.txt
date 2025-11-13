@@ -1,0 +1,6 @@
+projectKey=otp2-inclass-assignment-4
+serverUrl=http://localhost:9000
+serverVersion=25.11.0.114957
+dashboardUrl=http://localhost:9000/dashboard?id=otp2-inclass-assignment-4
+ceTaskId=1a7d8331-2b88-4324-bb88-77bde5a7793f
+ceTaskUrl=http://localhost:9000/api/ce/task?id=1a7d8331-2b88-4324-bb88-77bde5a7793f
