@@ -72,20 +72,20 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // build Docker image using sonarcalculator as the build context
-                    dir('sonarcalculator') {
-                        if (isUnix()) {
-                            sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                        } else {
-                            bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                        }
-                    }
-                }
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             // build Docker image using sonarcalculator as the build context
+        //             dir('sonarcalculator') {
+        //                 if (isUnix()) {
+        //                     sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+        //                 } else {
+        //                     bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
     //     stage('Push Docker Image to Docker Hub') {
     //         steps {
