@@ -68,7 +68,7 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco()
+                jacoco execPattern: '**/target/jacoco.exec'
             }
         }
 
@@ -81,7 +81,6 @@ pipeline {
                                 ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
                                 -Dsonar.projectKey=otp2-inclass-assignment-5 ^
                                 -Dsonar.sources=src/main/java ^
-                                -Dsonar.tests=src/test/java ^
                                 -Dsonar.projectName=otp2-inclass-assignment-5 ^
                                 -Dsonar.host.url=${SONAR_HOST_URL} ^
                                 -Dsonar.token=%SONAR_TOKEN% ^
