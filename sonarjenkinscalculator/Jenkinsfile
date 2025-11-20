@@ -1,19 +1,20 @@
 pipeline {
     agent any
-    tools{
-        maven 'Maven 3.9.9'
-
-    }
 
     environment {
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+
+        // Define Docker Hub credentials ID
         DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE = 'onnikiv/sonarjenkinscalculator'
         DOCKER_TAG = 'latest'
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_AUTH_TOKEN = credentials('SonarQubeServer')
         SONARQUBE_SCANNER = 'SonarScanner'
+    }
 
+    tools {
+        maven 'Maven 3.9.9'
     }
 
     stages {
@@ -35,7 +36,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // run mvn inside the sonarjenkinscalculator subdirectory where the pom.xml lives
                     dir('sonarjenkinscalculator') {
                         if (isUnix()) {
                             sh 'mvn clean package -DskipTests'
@@ -61,60 +61,11 @@ pipeline {
             }
             post {
                 always {
-                    // Archive JUnit test reports and JaCoCo HTML report
                     junit allowEmptyResults: true, testResults: 'sonarjenkinscalculator/target/surefire-reports/*.xml'
                     archiveArtifacts artifacts: 'sonarjenkinscalculator/target/site/jacoco/**', allowEmptyArchive: true
                 }
             }
         }
-
-        stage('Test') {
-            steps {
-                script {
-                    echo 'Tests'
-                }
-            }
-        }
-
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             // build Docker image using sonarjenkinscalculator as the build context
-        //             dir('sonarjenkinscalculator') {
-        //                 if (isUnix()) {
-        //                     sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-        //                 } else {
-        //                     bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
-    //     stage('Push Docker Image to Docker Hub') {
-    //         steps {
-    //             script {
-    //                 echo "Attempting to use credentials: ${env.DOCKERHUB_CREDENTIALS_ID}"
-    //                 withCredentials([usernamePassword(credentialsId: 'Docker_Hub', 
-    //                                                 passwordVariable: 'DOCKER_PASSWORD', 
-    //                                                 usernameVariable: 'DOCKER_USERNAME')]) {
-    //                     echo "Credentials loaded successfully"
-    //                     if (isUnix()) {
-    //                         sh 'echo "Logging into Docker Hub..."'
-    //                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-    //                         sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-    //                         sh 'docker logout'
-    //                     } else {
-    //                         bat 'echo "Logging into Docker Hub..."'
-    //                         bat 'echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin'
-    //                         bat "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-    //                         bat 'docker logout'
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    
 
         stage('SonarQube Analysis') {
             steps {
@@ -124,9 +75,9 @@ pipeline {
                             bat """
                                 set SONAR_SCANNER_OPTS=-Dsonar.token=%SONAR_TOKEN%
                                 ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
-                                -Dsonar.projectKey=devops-demo ^
+                                -Dsonar.projectKey=otp2-inclass-assignment-5 ^
                                 -Dsonar.sources=src ^
-                                -Dsonar.projectName=DevOps-Demo ^
+                                -Dsonar.projectName=otp2-inclass-assignment-5 ^
                                 -Dsonar.java.binaries=target/classes
                             """
                         }
