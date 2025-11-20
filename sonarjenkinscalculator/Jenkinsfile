@@ -112,7 +112,7 @@ pipeline {
     //     }
     
 
-    stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
                     bat """
@@ -127,11 +127,11 @@ pipeline {
                 }
             }
         }
+    }
 
     post {
         always {
             echo 'Pipeline completed.'
         }
     }
-}
 }
