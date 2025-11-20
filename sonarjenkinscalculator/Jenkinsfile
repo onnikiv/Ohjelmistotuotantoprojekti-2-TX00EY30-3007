@@ -71,15 +71,17 @@ pipeline {
             steps {
                 script {
                     dir('sonarjenkinscalculator') {
-                        bat """
-                            ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
-                            -Dsonar.projectKey=otp2-inclass-assignment-5 ^
-                            -Dsonar.sources=src ^
-                            -Dsonar.projectName=otp2-inclass-assignment-5 ^
-                            -Dsonar.host.url=${SONAR_HOST_URL} ^
-                            -Dsonar.token=${SONAR_AUTH_TOKEN} ^
-                            -Dsonar.java.binaries=target/classes
-                        """
+                        withCredentials([string(credentialsId: 'SonarQubeServer', variable: 'SONAR_TOKEN')]) {
+                            bat """
+                                ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                                -Dsonar.projectKey=otp2-inclass-assignment-5 ^
+                                -Dsonar.sources=src/main/java ^
+                                -Dsonar.projectName=otp2-inclass-assignment-5 ^
+                                -Dsonar.host.url=${SONAR_HOST_URL} ^
+                                -Dsonar.token=%SONAR_TOKEN% ^
+                                -Dsonar.java.binaries=target/classes
+                            """
+                        }
                     }
                 }
             }
