@@ -6,7 +6,7 @@ pipeline {
 
         // Define Docker Hub credentials ID
         DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
-        DOCKER_IMAGE = 'onnikiv/sonarjenkinscalculator'
+        DOCKER_IMAGE = 'onnikiv/sonarqubejenkins'
         DOCKER_TAG = 'latest'
         SONAR_HOST_URL = 'http://localhost:9000'
         SONAR_AUTH_TOKEN = credentials('SonarQubeServer')
@@ -36,7 +36,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('sonarjenkinscalculator') {
+                    dir('sonarqubejenkins') {
                         if (isUnix()) {
                             sh 'mvn clean package -DskipTests'
                         } else {
@@ -50,7 +50,7 @@ pipeline {
         stage('Test & Coverage') {
             steps {
                 script {
-                    dir('sonarjenkinscalculator') {
+                    dir('sonarqubejenkins') {
                         if (isUnix()) {
                             sh 'mvn test jacoco:report'
                         } else {
@@ -64,7 +64,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    dir('sonarjenkinscalculator') {
+                    dir('sonarqubejenkins') {
                         withCredentials([string(credentialsId: 'SonarQubeServer', variable: 'SONAR_TOKEN')]) {
                             bat """
                                 ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
@@ -84,8 +84,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // build Docker image using sonarjenkinscalculator as the build context
-                    dir('sonarjenkinscalculator') {
+                    // build Docker image using sonarqubejenkins as the build context
+                    dir('sonarqubejenkins') {
                         if (isUnix()) {
                             sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                         } else {

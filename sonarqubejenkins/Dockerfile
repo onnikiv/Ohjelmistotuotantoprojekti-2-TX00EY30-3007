@@ -15,4 +15,4 @@ WORKDIR /app
 # Copy built jar from build stage (if any artifact exists)
 COPY --from=build /app/target /app/target
 
-CMD ["java", "-jar", "/app/target/sonarjenkinscalculator-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/target/sonarqubejenkins-1.0-SNAPSHOT.jar"]
