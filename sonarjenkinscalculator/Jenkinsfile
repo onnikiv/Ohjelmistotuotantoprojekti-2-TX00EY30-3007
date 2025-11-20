@@ -80,8 +80,8 @@ pipeline {
                 }
             }
         }
-    }
-            stage('Build Docker Image') {
+
+        stage('Build Docker Image') {
             steps {
                 script {
                     // build Docker image using sonarcalculator as the build context
@@ -94,7 +94,7 @@ pipeline {
                     }
                 }
             }
-        
+        }
 
         stage('Push Docker Image to Docker Hub') {
             steps {
