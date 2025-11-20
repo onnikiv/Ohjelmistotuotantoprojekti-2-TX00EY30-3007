@@ -1,17 +1,30 @@
 package assignment;
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class App {
 
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    private static final Logger logger = Logger.getLogger(App.class.getName());
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void main(String[] args) {
+
+        logger.info("Hello and welcome!");
+
+        int count;
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            logger.info("How many numbers to display in the loops? ");
+            count = scanner.nextInt();
+        }
+
+        displayNumbers(count);
+    }
+
+    public static void displayNumbers(int count) {
+        for (int i = 1; i <= count; i++) {
+            final int current = i;
+            logger.info(() -> "i = " + current);
         }
     }
 }
