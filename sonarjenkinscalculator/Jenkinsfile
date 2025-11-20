@@ -71,16 +71,15 @@ pipeline {
             steps {
                 script {
                     dir('sonarjenkinscalculator') {
-                        withSonarQubeEnv('SonarQubeServer') {
-                            bat """
-                                set SONAR_SCANNER_OPTS=-Dsonar.token=%SONAR_TOKEN%
-                                ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
-                                -Dsonar.projectKey=otp2-inclass-assignment-5 ^
-                                -Dsonar.sources=src ^
-                                -Dsonar.projectName=otp2-inclass-assignment-5 ^
-                                -Dsonar.java.binaries=target/classes
-                            """
-                        }
+                        bat """
+                            ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                            -Dsonar.projectKey=otp2-inclass-assignment-5 ^
+                            -Dsonar.sources=src ^
+                            -Dsonar.projectName=otp2-inclass-assignment-5 ^
+                            -Dsonar.host.url=${SONAR_HOST_URL} ^
+                            -Dsonar.token=${SONAR_AUTH_TOKEN} ^
+                            -Dsonar.java.binaries=target/classes
+                        """
                     }
                 }
             }
