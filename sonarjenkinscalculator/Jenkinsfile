@@ -122,6 +122,7 @@ pipeline {
                     dir('sonarjenkinscalculator') {
                         withSonarQubeEnv('SonarQubeServer') {
                             bat """
+                                set SONAR_SCANNER_OPTS=-Dsonar.token=%SONAR_TOKEN%
                                 ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
                                 -Dsonar.projectKey=devops-demo ^
                                 -Dsonar.sources=src ^
