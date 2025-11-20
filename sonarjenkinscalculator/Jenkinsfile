@@ -60,17 +60,6 @@ pipeline {
                 }
             }
         }
-        stage('Publish Test Results') {
-            steps {
-                junit '**/target/surefire-reports/*.xml'
-            }
-        }
-
-        stage('Publish Coverage Report') {
-            steps {
-                jacoco execPattern: '**/target/jacoco.exec'
-            }
-        }
 
         stage('SonarQube Analysis') {
             steps {
