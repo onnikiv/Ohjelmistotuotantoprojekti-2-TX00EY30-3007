@@ -59,11 +59,16 @@ pipeline {
                     }
                 }
             }
-            post {
-                always {
-                    junit allowEmptyResults: true, testResults: 'sonarjenkinscalculator/target/surefire-reports/*.xml'
-                    archiveArtifacts artifacts: 'sonarjenkinscalculator/target/site/jacoco/**', allowEmptyArchive: true
-                }
+        }
+        stage('Publish Test Results') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'
+            }
+        }
+
+        stage('Publish Coverage Report') {
+            steps {
+                jacoco()
             }
         }
 
