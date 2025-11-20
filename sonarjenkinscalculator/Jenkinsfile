@@ -10,6 +10,10 @@ pipeline {
         DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE = 'onnikiv/sonarjenkinscalculator'
         DOCKER_TAG = 'latest'
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_AUTH_TOKEN = credentials('SonarQubeServer')
+        SONARQUBE_SCANNER = 'SonarScanner'
+
     }
 
     stages {
